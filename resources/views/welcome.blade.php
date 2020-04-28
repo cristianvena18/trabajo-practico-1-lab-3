@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Time Deposit Calculator</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -70,18 +70,14 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('timeDepositCalculator') }}">
                             @csrf
-
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
-
-                                    @if ($errors->has('name'))
-                                        <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
-                                    @endif
                                 </div>
                             </div>
 
@@ -126,6 +122,21 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="days" class="col-md-4 col-form-label text-md-right">{{ __('Reinvertir') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="compound" type="checkbox" class="form-control{{ $errors->has('compound') ? ' is-invalid' : '' }}" name="compound" value="false">
+
+                                    @if ($errors->has('compound'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('compound') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

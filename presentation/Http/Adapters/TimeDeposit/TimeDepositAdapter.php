@@ -4,8 +4,9 @@
 namespace Presentation\Http\Adapters\TimeDeposit;
 
 
-use Application\Commands\Command\TimeDeposit\CompoundTimeDepositCommand;
-use Application\Commands\Command\TimeDeposit\SimpleTimeDepositCommand;
+use App\Exceptions\InvalidBodyException;
+use Application\Commands\TimeDeposit\CompoundTimeDepositCommand;
+use Application\Commands\TimeDeposit\SimpleTimeDepositCommand;
 use Illuminate\Http\Request;
 use Infrastructure\CommandBus\Command\CommandInterface;
 use Presentation\Http\Validators\Schemas\TimeDepositSchema;
@@ -22,13 +23,22 @@ class TimeDepositAdapter
         $this->schema = $schema;
     }
 
+    /**
+     * @param $request
+     * @return CompoundTimeDepositCommand|SimpleTimeDepositCommand
+     * @throws InvalidBodyException
+     */
     public function from($request)
     {
         $this->validatorService->make($request, $this->schema->getRules());
 
+        if(!$this->validatorService->isValid()) {
+            throw new InvalidBodyException($this->validatorService->getErrors());
+        }
+
         $compound = array_get($request,'compound');
 
-        if($compound){
+        if(isset($compound)) {
             return new CompoundTimeDepositCommand(
                 array_get($request, 'name'),
                 array_get($request, 'surname'),

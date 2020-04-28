@@ -3,14 +3,13 @@
 
 namespace Presentation\Http\Presenters\TimeDeposit;
 
-
-use Application\Commands\Results\TimeDeposit\SimpleTimeDepositResult;
+use Infrastructure\CommandBus\ResultInterface;
 
 class SimpleTimeDepositPresenter
 {
-    private SimpleTimeDepositResult $result;
+    private ResultInterface $result;
 
-    public function fromResult(SimpleTimeDepositResult $result): SimpleTimeDepositPresenter
+    public function fromResult(ResultInterface $result): SimpleTimeDepositPresenter
     {
         $this->result = $result;
         return $this;
@@ -19,8 +18,8 @@ class SimpleTimeDepositPresenter
     public function getData(): array {
         return [
             'fullName' => $this->result->getFullName(),
-            'mount' => array_get($this->result->getTimeDeposits(), 'mount'),
-            'increment' => array_get($this->result->getTimeDeposits(), 'interest'),
+            'mount' => $this->result->getMount(),
+            'interest' => $this->result->getInterest(),
             'days' => $this->result->getDays()
         ];
     }

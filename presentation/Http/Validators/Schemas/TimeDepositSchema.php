@@ -12,7 +12,7 @@ class TimeDepositSchema
             'surname' => 'bail|required|alpha|min:4|max:16',
             'mount' => 'bail|required|numeric',
             'days' => 'bail|required|integer|min:30',
-            'compound' => 'bail|boolean|nullable'
+            //'compound' => 'bail|boolean|nullable'
         ];
     }
 }

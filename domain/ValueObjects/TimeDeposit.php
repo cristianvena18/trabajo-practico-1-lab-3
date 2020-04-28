@@ -30,4 +30,9 @@ class TimeDeposit
             'interest' => $this->interest,
         ];
     }
+
+    public function __toString()
+    {
+        return ' mount: ' . $this->mount . ', interest: ' . $this->interest;
+    }
 }

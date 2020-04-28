@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Presentation\Http\Actions;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/result', function () {
-    return view('welcome');
-});
+    return view('timeDeposit');
+})->name('timeDeposit');
+
+Route::post('calculate', Actions\TimeDeposit\TimeDepositAction::class)->name('timeDepositCalculator');

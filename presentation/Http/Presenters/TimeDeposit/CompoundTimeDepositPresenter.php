@@ -4,13 +4,13 @@
 namespace Presentation\Http\Presenters\TimeDeposit;
 
 
-use Application\Commands\Results\TimeDeposit\CompoundTimeDepositResult;
+use Infrastructure\CommandBus\ResultInterface;
 
 class CompoundTimeDepositPresenter
 {
-    private CompoundTimeDepositResult $result;
+    private ResultInterface $result;
 
-    public function fromResult(CompoundTimeDepositResult $result): CompoundTimeDepositPresenter
+    public function fromResult(ResultInterface $result): CompoundTimeDepositPresenter
     {
         $this->result = $result;
         return $this;
@@ -19,10 +19,9 @@ class CompoundTimeDepositPresenter
     public function getData(): array
     {
         return [
-            'fullName' => $this->result->getFullName(),
-            'mount' => array_get($this->result->getTimeDeposits(), 'mount'),
-            'increment' => array_get($this->result->getTimeDeposits(), 'interest'),
-            'days' => $this->result->getDays()
+            'fullName' => 'fullname: ' .  $this->result->getFullName(),
+            'mount' => $this->result->getTimeDeposits(),
+            'days' => ' days: ' . $this->result->getDays()
         ];
     }
 }

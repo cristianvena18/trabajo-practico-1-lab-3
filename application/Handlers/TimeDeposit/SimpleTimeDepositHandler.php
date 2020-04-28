@@ -1,17 +1,15 @@
 <?php
 
 
-namespace Application\Commands\Handler\TimeDeposit;
+namespace Application\Handlers\TimeDeposit;
 
-
-use Application\Commands\Results\TimeDeposit\CompoundTimeDepositResult;
 use Application\Commands\Results\TimeDeposit\SimpleTimeDepositResult;
 use Application\Services\TimeDeposit\TimeDepositService;
 use Infrastructure\CommandBus\Command\CommandInterface;
 use Infrastructure\CommandBus\Handler\HandlerInterface;
 use Infrastructure\CommandBus\ResultInterface;
 
-class CompoundTimeDepositHandler implements HandlerInterface
+final class SimpleTimeDepositHandler implements HandlerInterface
 {
     private TimeDepositService $timeDepositService;
 
@@ -22,22 +20,15 @@ class CompoundTimeDepositHandler implements HandlerInterface
 
     public function handle($command): ResultInterface
     {
-        $days = $command->getDays();
+        $timeDeposit = $this->timeDepositService->CalculateSimpleTimeDeposit(
+                                $command->getMount(),
+                                $command->getDays());
 
-        $timeDeposits[] = $this->timeDepositService->CalculateSimpleTimeDeposit(
-            $command->getMount(),
-            $days);
-
-        for ($i = 0; $i < 3; $i++) {
-            $timeDeposits[] = $this->timeDepositService->CalculateSimpleTimeDeposit(
-                                        $timeDeposits[$i]->getMount(),
-                                        $days);
-        }
-
-        return new CompoundTimeDepositResult(
+        return new SimpleTimeDepositResult(
             $this->getFullNameFromCommand($command),
-            $timeDeposits,
-            $command->getDays()
+            $timeDeposit->getMount(),
+            $command->getDays(),
+            $timeDeposit->getInterest()
         );
     }
 

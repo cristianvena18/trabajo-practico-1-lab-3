@@ -19,4 +19,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('calculate', Actions\TimeDeposit\TimeDepositAction::class)->name('timeDepositCalculator');

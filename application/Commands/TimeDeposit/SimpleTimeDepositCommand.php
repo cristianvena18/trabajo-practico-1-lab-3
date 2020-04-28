@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Application\Commands\Command\TimeDeposit;
+namespace Application\Commands\TimeDeposit;
 
 
 use Infrastructure\CommandBus\Command\CommandInterface;

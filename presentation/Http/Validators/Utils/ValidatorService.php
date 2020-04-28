@@ -28,7 +28,7 @@ class ValidatorService implements ValidatorServiceInterface
 
     public function getErrors(): array
     {
-        return $this->validated->errors();
+        return $this->validated->errors()->toArray();
     }
 
     public function getValidator(){

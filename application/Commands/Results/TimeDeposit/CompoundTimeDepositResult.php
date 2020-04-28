@@ -24,8 +24,8 @@ class CompoundTimeDepositResult implements ResultInterface
         return $this->fullName;
     }
 
-    public function getTimeDeposits(): array {
-        return $this->timeDeposits;
+    public function getTimeDeposits(): string {
+        return implode($this->timeDeposits);
     }
 
     public function getDays(): int {

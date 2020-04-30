@@ -5,19 +5,8 @@ namespace Presentation\Http\Actions\TimeDeposit;
 
 
 use App\Exceptions\InvalidBodyException;
-use Application\Commands\TimeDeposit\CompoundTimeDepositQuery;
-use Application\Commands\TimeDeposit\SimpleTimeDepositQuery;
-use Application\Handlers\TimeDeposit\CompoundTimeDepositHandler;
-use Application\Handlers\TimeDeposit\SimpleTimeDepositHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Infrastructure\CommandBus\CommandBusInterface;
 use Infrastructure\QueryBus\QueryBusInterface;
 use Presentation\Http\Adapters\TimeDeposit\TimeDepositAdapter;
-use Presentation\Http\Enums\HttpCodes;
-use Presentation\Http\Presenters\TimeDeposit\CompoundTimeDepositPresenter;
-use Presentation\Http\Presenters\TimeDeposit\SimpleTimeDepositPresenter;
 use Presentation\Http\Presenters\TimeDeposit\TimeDepositPresenter;
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -5,10 +5,8 @@ namespace Presentation\Http\Adapters\TimeDeposit;
 
 
 use App\Exceptions\InvalidBodyException;
-use Application\Commands\TimeDeposit\CompoundTimeDepositCommand;
-use Application\Commands\TimeDeposit\SimpleTimeDepositCommand;
-use Illuminate\Http\Request;
-use Infrastructure\CommandBus\Command\CommandInterface;
+use Application\Queries\Query\TimeDeposit\CompoundTimeDepositQuery;
+use Application\Queries\Query\TimeDeposit\SimpleTimeDepositQuery;
 use Presentation\Http\Validators\Schemas\TimeDepositSchema;
 use Presentation\Http\Validators\Utils\ValidatorServiceInterface;
 
@@ -25,7 +23,7 @@ class TimeDepositAdapter
 
     /**
      * @param $request
-     * @return CompoundTimeDepositCommand|SimpleTimeDepositCommand
+     * @return CompoundTimeDepositQuery|SimpleTimeDepositQuery
      * @throws InvalidBodyException
      */
     public function from($request)
@@ -39,7 +37,7 @@ class TimeDepositAdapter
         $compound = array_get($request,'compound');
 
         if(isset($compound)) {
-            return new CompoundTimeDepositCommand(
+            return new CompoundTimeDepositQuery(
                 array_get($request, 'name'),
                 array_get($request, 'surname'),
                 array_get($request,'mount'),
@@ -47,7 +45,7 @@ class TimeDepositAdapter
             );
         }
         else {
-            return new SimpleTimeDepositCommand(
+            return new SimpleTimeDepositQuery(
                 array_get($request, 'name'),
                 array_get($request, 'surname'),
                 array_get($request,'mount'),

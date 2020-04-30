@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Application\Commands\Results\TimeDeposit;
+namespace Application\Queries\Result\TimeDeposit;
 
 
 use Domain\ValueObjects\TimeDeposit;
-use Infrastructure\CommandBus\ResultInterface;
+use Infrastructure\QueryBus\Result\ResultInterface;
 
 class CompoundTimeDepositResult implements ResultInterface
 {

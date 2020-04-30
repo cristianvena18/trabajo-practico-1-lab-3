@@ -27,8 +27,6 @@ class CommandNameExtractor implements CommandNameExtractorInterface
             throw CannotDetermineCommandNameException::forCommand($command);
         }
 
-        var_dump($commandName);
-
         return $commandName;
     }
 }

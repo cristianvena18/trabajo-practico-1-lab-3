@@ -29,7 +29,7 @@ final class CommandBus implements CommandBusInterface
      * @param CommandInterface $command
      * @throws InvalidHandlerException
      */
-    public function handle(CommandInterface $command): ResultInterface
+    public function handle(CommandInterface $command): void
     {
         if (!is_object($command)) {
             throw InvalidCommandException::forUnknownValue($command);
@@ -42,11 +42,6 @@ final class CommandBus implements CommandBusInterface
         if (!empty($result)) {
             throw new InvalidHandlerException('A command execution must not return a result');
         }
-
-        if(!$result instanceof ResultInterface) {
-            throw new InvalidHandlerException("A result not implement ResultInterface");
-        }
-        return $result;
     }
 
     /**

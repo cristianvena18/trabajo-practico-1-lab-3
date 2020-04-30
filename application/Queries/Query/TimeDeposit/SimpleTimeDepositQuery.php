@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Application\Commands\TimeDeposit;
+namespace Application\Queries\Query\TimeDeposit;
 
 
-use Infrastructure\CommandBus\Command\CommandInterface;
+use Infrastructure\QueryBus\Query\QueryInterface;
 
-class CompoundTimeDepositCommand implements CommandInterface
+class SimpleTimeDepositQuery implements QueryInterface
 {
     private string $name;
     private string $surname;

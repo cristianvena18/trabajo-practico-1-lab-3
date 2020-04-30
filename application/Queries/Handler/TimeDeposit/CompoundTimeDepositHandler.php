@@ -1,14 +1,16 @@
 <?php
 
 
-namespace Application\Handlers\TimeDeposit;
+namespace Application\Queries\Handler\TimeDeposit;
 
 
-use Application\Commands\Results\TimeDeposit\CompoundTimeDepositResult;
+use Application\Queries\Result\TimeDeposit\CompoundTimeDepositResult;
 use Application\Services\TimeDeposit\TimeDepositService;
 use Infrastructure\CommandBus\Command\CommandInterface;
-use Infrastructure\CommandBus\Handler\HandlerInterface;
-use Infrastructure\CommandBus\ResultInterface;
+use Infrastructure\QueryBus\Handler\HandlerInterface;
+use Infrastructure\QueryBus\Query\QueryInterface;
+use Infrastructure\QueryBus\Result\ResultInterface;
+
 
 class CompoundTimeDepositHandler implements HandlerInterface
 {
@@ -19,6 +21,10 @@ class CompoundTimeDepositHandler implements HandlerInterface
         $this->timeDepositService = $timeDepositService;
     }
 
+    /**
+     * @param QueryInterface $command
+     * @return ResultInterface
+     */
     public function handle($command): ResultInterface
     {
         $days = $command->getDays();
@@ -40,7 +46,7 @@ class CompoundTimeDepositHandler implements HandlerInterface
         );
     }
 
-    private function getFullNameFromCommand(CommandInterface $command): string {
+    private function getFullNameFromCommand($command): string {
         $name = $command->getName();
         $surname = $command->getSurname();
 
